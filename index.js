@@ -14,13 +14,27 @@ var l = 'sounds/kick-bass.mp3';
 
 for (var i =0; i < number_of_instruments; i++) {
     
-    document.querySelectorAll(".drum")[i].addEventListener("click", checkAndPlay);
+    document.querySelectorAll(".drum")[i].addEventListener("click", function(){
+        var buttonInnerHTML = this.innerHTML;
+        checkAndPlay(buttonInnerHTML);
+        buttonAnimation(buttonInnerHTML);
+    });
     
 }
 
-function checkAndPlay(){
-    var x = String(this.innerHTML);
-    var y = event.key;
+
+document.addEventListener("keypress", function(event){
+        checkAndPlay(event.key);
+        buttonAnimation(event.key);
+})
+
+
+
+
+function checkAndPlay(event){
+    var x = event;
+    var y = event;
+    // buttonAnimation()
         if(x == 'w' || y == 'w')
             x = w;
         else if(x == 'a' || y == 'a')
@@ -45,4 +59,12 @@ function playMusic(element){
             adios.play();
 }
 
-document.addEventListener("keypress", checkAndPlay)
+
+function buttonAnimation(key){
+        var pressedButton = document.querySelector("."+key);
+        pressedButton.classList.add("pressed");
+
+        setTimeout(function(){
+            pressedButton.classList.remove("pressed");
+        }, 120);
+}
