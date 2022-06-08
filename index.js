@@ -1,6 +1,3 @@
-
-var number_of_instruments = $(".drum").length;
-
    
 var w = 'sounds/tom-1.mp3';
 var a = 'sounds/tom-2.mp3';
