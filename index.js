@@ -1,5 +1,5 @@
 
-var number_of_instruments = document.querySelectorAll(".drum").length;
+var number_of_instruments = $(".drum").length;
 
    
 var w = 'sounds/tom-1.mp3';
@@ -12,18 +12,15 @@ var l = 'sounds/kick-bass.mp3';
 
 
 
-for (var i =0; i < number_of_instruments; i++) {
-    
-    document.querySelectorAll(".drum")[i].addEventListener("click", function(){
-        var buttonInnerHTML = this.innerHTML;
-        checkAndPlay(buttonInnerHTML);
-        buttonAnimation(buttonInnerHTML);
+$(".drum").click("click", function(){
+        
+        checkAndPlay($(this).html());
+        buttonAnimation($(this).html());
     });
-    
-}
 
 
-document.addEventListener("keypress", function(event){
+
+$(document).keypress(function(event){
         checkAndPlay(event.key);
         buttonAnimation(event.key);
 })
@@ -32,22 +29,21 @@ document.addEventListener("keypress", function(event){
 
 
 function checkAndPlay(event){
-    var x = event;
-    var y = event;
+    var x;
     // buttonAnimation()
-        if(x == 'w' || y == 'w')
+        if(event == 'w')
             x = w;
-        else if(x == 'a' || y == 'a')
+        else if(event == 'a')
             x = a;
-        else if(x == 's' || y == 's')
+        else if(event == 's')
             x = s;
-        else if(x == 'd' || y == 'd')
+        else if(event == 'd')
             x = d;
-        else if(x == 'j' || y == 'j')
+        else if(event == 'j')
             x = j;
-        else if(x == 'k' || y == 'k')
+        else if(event == 'k')
             x = k;
-        else if(x == 'l' || y == 'l')
+        else if(event == 'l')
             x = l;
         
         playMusic(x);
@@ -61,10 +57,9 @@ function playMusic(element){
 
 
 function buttonAnimation(key){
-        var pressedButton = document.querySelector("."+key);
-        pressedButton.classList.add("pressed");
+        $("."+key).addClass("pressed");
 
         setTimeout(function(){
-            pressedButton.classList.remove("pressed");
-        }, 120);
+            $("."+key).removeClass("pressed");
+        }, 90);
 }
